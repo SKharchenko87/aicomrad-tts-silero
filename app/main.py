@@ -50,7 +50,7 @@ async def synthesize(request: SynthesisRequest):
     
     audio_files = []
     for chunk in chunks:
-        path = tts.synthesize(chunk, speaker=request.speaker)
+        path = tts.synthesize(chunk, speaker=request.speaker, language=request.language)
         audio_files.append(path)
     
     # Combine audio files if multiple chunks
