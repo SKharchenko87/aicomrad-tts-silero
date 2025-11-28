@@ -26,6 +26,34 @@ A modern web interface for Silero TTS v5, built with FastAPI and Docker.
 
 3. Open [http://localhost:5000](http://localhost:5000)
 
+### Using Pre-downloaded Models
+
+To avoid downloading models on every container start, you can mount a directory with pre-downloaded models:
+
+**Linux/macOS:**
+```bash
+# Create models directory and download models
+mkdir models
+curl -L https://models.silero.ai/models/tts/ru/v5_ru.pt -o models/model_ru.pt
+curl -L https://models.silero.ai/models/tts/en/v3_en.pt -o models/model_en.pt
+
+# Run with mounted models
+docker run -p 5000:5000 -v $(pwd)/models:/models silero-tts
+```
+
+**Windows (PowerShell):**
+```powershell
+# Create models directory and download models
+mkdir models
+Invoke-WebRequest -Uri "https://models.silero.ai/models/tts/ru/v5_ru.pt" -OutFile "models/model_ru.pt"
+Invoke-WebRequest -Uri "https://models.silero.ai/models/tts/en/v3_en.pt" -OutFile "models/model_en.pt"
+
+# Run with mounted models
+docker run -p 5000:5000 -v ${PWD}/models:/models silero-tts
+```
+
+**Note:** Model files must be named `model_ru.pt` and `model_en.pt` for the service to recognize them.
+
 ## Development
 
 ### Requirements
