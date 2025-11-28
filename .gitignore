@@ -38,3 +38,6 @@ ENV/
 cache/
 *.wav
 *.mp3
+
+
+models/
