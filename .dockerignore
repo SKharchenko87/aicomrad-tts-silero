@@ -16,3 +16,4 @@ pip-delete-this-directory.txt
 cache/
 *.wav
 *.mp3
+models/
