@@ -38,8 +38,8 @@ COPY --from=builder /root/.local /root/.local
 COPY app ./app
 COPY requirements.txt .
 
-# Create cache directory
-RUN mkdir cache
+# Create cache and models directories
+RUN mkdir cache && mkdir models
 
 EXPOSE 5000
 

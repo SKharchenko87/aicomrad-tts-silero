@@ -25,12 +25,24 @@ class SileroTTS:
         if lang not in self.model_urls:
             raise ValueError(f"Language {lang} not supported")
 
-        model_filename = f"model_{lang}.pt"
-        if not os.path.isfile(model_filename):
+        # Check for mounted models first
+        mounted_model_path = f"/models/model_{lang}.pt"
+        local_model_path = f"model_{lang}.pt"
+        
+        if os.path.isfile(mounted_model_path):
+            print(f"Using mounted {lang} model from {mounted_model_path}")
+            model_filename = mounted_model_path
+        elif os.path.isfile(local_model_path):
+            print(f"Using local {lang} model")
+            model_filename = local_model_path
+        else:
             print(f"Downloading {lang} model...")
-            torch.hub.download_url_to_file(self.model_urls[lang], model_filename)
+            torch.hub.download_url_to_file(self.model_urls[lang], local_model_path)
+            model_filename = local_model_path
         
         model = torch.package.PackageImporter(model_filename).load_pickle("tts_models", "model")
+        model.to(self.device)
+        self.models[lang] = model
         model.to(self.device)
         self.models[lang] = model
         self.speakers[lang] = model.speakers

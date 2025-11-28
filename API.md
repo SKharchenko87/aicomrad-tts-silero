@@ -2,9 +2,44 @@
 
 ## Запуск сервиса
 
+### Базовый запуск
+
 ```bash
 docker run -p 5000:5000 silero-tts
 ```
+
+При первом запуске модели будут загружены автоматически (~500MB для русской модели, ~100MB для английской).
+
+### Запуск с примонтированными моделями
+
+Чтобы избежать повторной загрузки моделей при каждом запуске контейнера, вы можете примонтировать директорию с предзагруженными моделями:
+
+```bash
+# Создайте директорию для моделей
+mkdir models
+
+# Скачайте модели вручную
+curl -L https://models.silero.ai/models/tts/ru/v5_ru.pt -o models/model_ru.pt
+curl -L https://models.silero.ai/models/tts/en/v3_en.pt -o models/model_en.pt
+
+# Запустите контейнер с примонтированными моделями
+docker run -p 5000:5000 -v $(pwd)/models:/models silero-tts
+```
+
+**Windows (PowerShell):**
+```powershell
+# Создайте директорию для моделей
+mkdir models
+
+# Скачайте модели
+Invoke-WebRequest -Uri "https://models.silero.ai/models/tts/ru/v5_ru.pt" -OutFile "models/model_ru.pt"
+Invoke-WebRequest -Uri "https://models.silero.ai/models/tts/en/v3_en.pt" -OutFile "models/model_en.pt"
+
+# Запустите контейнер
+docker run -p 5000:5000 -v ${PWD}/models:/models silero-tts
+```
+
+При запуске с примонтированными моделями сервис будет использовать их вместо загрузки.
 
 ## API Endpoints
 
