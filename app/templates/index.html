@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silero TTS v5 - Premium Voice Synthesis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="background-glow"></div>
+    
+    <div class="container">
+        <header>
+            <h1>Silero TTS <span class="version">v5</span></h1>
+            <p class="subtitle">Next-Generation Neural Voice Synthesis</p>
+        </header>
+
+        <main class="glass-panel">
+            <div class="controls">
+                <div class="control-group">
+                    <label for="language-select">Language</label>
+                    <div class="select-wrapper">
+                        <select id="language-select">
+                            <option value="ru">Russian (RU)</option>
+                            <option value="en">English (EN)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label for="speaker-select">Voice Speaker</label>
+                    <div class="select-wrapper">
+                        <select id="speaker-select">
+                            <option value="" disabled selected>Loading speakers...</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-area">
+                <label for="text-input">Text to Synthesize</label>
+                <textarea id="text-input" maxlength="1000" placeholder="Enter your text here... (max 1000 characters)"></textarea>
+                <div class="char-count"><span id="char-current">0</span>/1000</div>
+            </div>
+
+            <div class="action-area">
+                <button id="synthesize-btn" class="primary-btn">
+                    <span class="btn-text">Generate Speech</span>
+                    <span class="loader hidden"></span>
+                </button>
+            </div>
+
+            <div id="result-area" class="result-area hidden">
+                <div class="audio-player-wrapper">
+                    <audio id="audio-player" controls></audio>
+                </div>
+                <a id="download-btn" class="secondary-btn" href="#" download="speech.wav">
+                    Download Audio
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

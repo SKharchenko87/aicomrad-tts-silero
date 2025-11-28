@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+
+omegaconf
+soundfile
+pydub
+scipy
+jinja2
+python-multipart
+aiofiles
